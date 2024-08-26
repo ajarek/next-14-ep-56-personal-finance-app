@@ -1,0 +1,51 @@
+ [
+    {
+      "type": "income",
+      "category": "salary",
+      "amount": 2500,
+      "date": "2024-08-25",
+      "description": "Monthly salary deposit",
+      "saved":0
+    },
+    {
+      "type": "income",
+      "category": "freelance",
+      "amount": 900,
+      "date": "2024-08-20",
+      "description": "Web development project",
+      "saved":0
+    },
+    {
+      "type": "expense",
+      "category": "groceries",
+      "amount": 200,
+      "date": "2024-08-24",
+      "description": "Weekly grocery shopping",
+      "saved":12
+    },
+    {
+      "type": "expense",
+      "category": "dining out",
+      "amount": 150,
+      "date": "2024-08-22",
+      "description": "Lunch with friends",
+      "saved":8
+    },
+    {
+      "type": "expense",
+      "category": "entertainment",
+      "amount": 90,
+      "date": "2024-08-21",
+      "description": "Movie tickets",
+      "saved":2
+    },
+    {
+      "type": "expense",
+      "category": "entertainment",
+      "amount": 140,
+      "date": "2024-08-21",
+      "description": "Theater tickets",
+      "saved":12
+    }
+  ]
+
