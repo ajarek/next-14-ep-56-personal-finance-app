@@ -33,6 +33,14 @@
     },
     {
       "type": "expense",
+      "category": "dining out",
+      "amount": 150,
+      "date": "2024-08-22",
+      "description": "Lunch with friends",
+      "saved":8
+    },
+    {
+      "type": "expense",
       "category": "entertainment",
       "amount": 90,
       "date": "2024-08-21",

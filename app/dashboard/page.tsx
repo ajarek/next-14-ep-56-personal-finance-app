@@ -21,7 +21,10 @@ const Dashboard = async () => {
   const saved = transactions
     .filter((t) => t.saved > 0)
     .reduce((acc, t) => acc + t.saved, 0)
-
+  const arrayCategory = transactions.map((t) => t.category)
+  const duplication = arrayCategory.filter(
+    (item, index) => arrayCategory.indexOf(item) !== index
+  )
   return (
     <main className='flex min-h-screen flex-col items-center justify-start px-24 max-sm:px-4 py-8 gap-8'>
       <div className='w-full grid grid-cols-3 gap-6'>
@@ -60,6 +63,7 @@ const Dashboard = async () => {
             <div className='grid grid-cols-2 gap-2'>
               {transactions
                 .filter((t) => t.saved > 0)
+                .filter((_,i)=>i<3)
                 .map((t, i) => (
                   <div
                     key={t.description}
@@ -74,20 +78,77 @@ const Dashboard = async () => {
                 ))}
             </div>
           </div>
-        </div>
-        <div>
-        <div className='flex flex-col'>
           <div className='flex items-center justify-between py-2'>
-            <h1 className='text-xl font-semibold'>Budgets</h1>
+            <h1 className='text-xl font-semibold'>Transactions</h1>
             <Link
-              href={'/dashboard/budgets'}
+              href={'/dashboard/transactions'}
               className='flex gap-1 hover:border-b border-blue-500 transition-all duration-300'
             >
               See Details <ChevronRight />
             </Link>
           </div>
+          <div className='flex flex-col gap-2'>
+            {transactions
+             .filter((_,i)=>i<3)
+            .map((t, i) => (
+              <div
+                key={t.description}
+                className={
+                  'flex justify-between items-center border-2 border-blue-500 rounded-lg p-2 ' +
+                  (i % 2 !== 0 ? 'border-yellow-500' : '')
+                }
+              >
+                <h2 className='text-sm'>{t.description}</h2>
+                <div className='flex flex-col gap-2'>
+                  <span className=''>${t.amount.toFixed(2)}</span>
+                  <span className=''>${t.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div className='flex flex-col'>
+            <div className='flex items-center justify-between py-2'>
+              <h1 className='text-xl font-semibold'>Budgets</h1>
+              <Link
+                href={'/dashboard/budgets'}
+                className='flex gap-1 hover:border-b border-blue-500 transition-all duration-300'
+              >
+                See Details <ChevronRight />
+              </Link>
+            </div>
           </div>
           <ChartPie />
+          <div className='flex items-center justify-between py-2'>
+            <h1 className='text-xl font-semibold'>Recurring Bills</h1>
+            <Link
+              href={'/dashboard/recurring-bills'}
+              className='flex gap-1 hover:border-b border-blue-500 transition-all duration-300'
+            >
+              See Details <ChevronRight />
+            </Link>
+          </div>
+
+          <div className='flex flex-col gap-2'>
+            {transactions
+              .filter((t) => t.type === 'expense')
+              .filter((t) => t.category.includes(duplication[0]))
+              .map((t, i) => (
+                <div
+                  key={t.description}
+                  className={
+                    'flex justify-between items-center border-2 border-blue-500 rounded-lg p-2 ' +
+                    (i % 2 !== 0 ? 'border-yellow-500' : '')
+                  }
+                >
+                  <h2 className='text-sm'>{t.description}</h2>
+                  <div className='flex '>
+                    <span className=''>${t.amount.toFixed(2)}</span>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </main>
