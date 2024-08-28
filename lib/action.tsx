@@ -2,11 +2,11 @@
 
 import connectToDb from './connectToDb'
 
-import { User, UserWithoutId } from './models'
+import { User, UserWithoutId, Transactions } from './models'
 import { revalidatePath } from 'next/cache'
 import bcrypt from 'bcryptjs'
 import { redirect } from 'next/navigation'
-
+import type { Transactions as TransactionsType } from './models'
 
 export const addUser = async (formData: UserWithoutId) => {
   const { username, email, password, img, isAdmin } = formData
@@ -69,4 +69,17 @@ export const updateUser = async (formData: FormData) => {
     redirect('/dashboard/')
   }
 }
+
+
+export const getTransactions = async () => {
+  try {
+    await connectToDb()
+
+    const allTransactions = (await Transactions.find({})) as TransactionsType[]
+    return allTransactions
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 

@@ -9,8 +9,18 @@ export type User = {
   isAdmin: boolean
 }
 
-
 export type UserWithoutId = Omit<User, '_id'>
+
+export type Transactions = {
+  type: string
+  category: string
+  amount: number
+  date: string
+  description: string
+  saved: number
+  userId:string
+
+}
 
 const userSchema = new mongoose.Schema(
   {
@@ -23,5 +33,18 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
+const transactionsSchema = new mongoose.Schema(
+  {
+    type: { type: String, required: true },
+    userId:{type: String, required: true },
+    category: { type: String, required: true },
+    amount: { type: Number, required: true },
+    date: { type: String, required: true },
+    description: { type: String, required: true },
+    saved: { type: Number, required: true },
+  },
+  { timestamps: true }
+)
 
 export const User = mongoose.models?.User || mongoose.model('User', userSchema)
+export const Transactions = mongoose.models?.Transactions || mongoose.model('Transactions', transactionsSchema)

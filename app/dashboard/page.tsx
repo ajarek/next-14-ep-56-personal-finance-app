@@ -1,7 +1,7 @@
 import { auth } from '@/app/api/auth/auth'
-import transactions from '@/data/data.json'
+// import transactions from '@/data/data.json'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
+import { getTransactions } from '@/lib/action'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
@@ -12,18 +12,18 @@ const Dashboard = async () => {
   if (!session) {
     redirect('/')
   }
-  const income = transactions
-    .filter((t) => t.type === 'income')
-    .reduce((acc, t) => acc + t.amount, 0)
-  const expense = transactions
-    .filter((t) => t.type === 'expense')
-    .reduce((acc, t) => acc + t.amount, 0)
-  const saved = transactions
-    .filter((t) => t.saved > 0)
-    .reduce((acc, t) => acc + t.saved, 0)
-  const arrayCategory = transactions.map((t) => t.category)
-  const duplication = arrayCategory.filter(
-    (item, index) => arrayCategory.indexOf(item) !== index
+  const transactions = await getTransactions() 
+  
+  const income = transactions?.filter((t:any) => t.type === 'income')
+    .reduce((acc:any, t:any) => acc + t.amount, 0)
+
+  const expense = transactions?.filter((t:any) => t.type === 'expense')
+    .reduce((acc:any, t:any) => acc + t.amount, 0)
+  const saved = transactions?.filter((t:any) => t.saved > 0)
+    .reduce((acc:any, t:any) => acc + t.saved, 0)
+  const arrayCategory = transactions?.map((t:any) => t.category)
+  const duplication = arrayCategory?.filter(
+    (item:any, index:number) => arrayCategory.indexOf(item) !== index
   )
   return (
     <main className='flex min-h-screen flex-col items-center justify-start px-24 max-sm:px-4 py-8 gap-8'>
@@ -61,10 +61,9 @@ const Dashboard = async () => {
               <span className='text-xl font-semibold'>${saved.toFixed(2)}</span>
             </div>
             <div className='grid grid-cols-2 gap-2'>
-              {transactions
-                .filter((t) => t.saved > 0)
-                .filter((_,i)=>i<3)
-                .map((t, i) => (
+              {transactions?.filter((t:any) => t.saved > 0)
+                .filter((_:any,i:number)=>i<3)
+                .map((t:any, i:number) => (
                   <div
                     key={t.description}
                     className={cn(
@@ -88,9 +87,8 @@ const Dashboard = async () => {
             </Link>
           </div>
           <div className='flex flex-col gap-2'>
-            {transactions
-             .filter((_,i)=>i<3)
-            .map((t, i) => (
+            {transactions?.filter((_:any,i:number)=>i<3)
+            .map((t:any, i:number) => (
               <div
                 key={t.description}
                 className={
@@ -131,10 +129,9 @@ const Dashboard = async () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            {transactions
-              .filter((t) => t.type === 'expense')
-              .filter((t) => t.category.includes(duplication[0]))
-              .map((t, i) => (
+            {transactions?.filter((t:any) => t.type === 'expense')
+              .filter((t:any) => t.category.includes(duplication?duplication[0]:null))
+              .map((t:any, i:number) => (
                 <div
                   key={t.description}
                   className={
