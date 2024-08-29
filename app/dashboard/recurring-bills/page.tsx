@@ -1,10 +1,10 @@
-import transactions from '@/data/data.json'
-import { cn } from '@/lib/utils'
+import { getTransactions } from '@/lib/action'
 
-const RecurringBills = () => {
-  const arrayCategory = transactions.map((t) => t.category)
-  const duplication = arrayCategory.filter(
-    (item, index) => arrayCategory.indexOf(item) !== index
+const RecurringBills = async () => {
+  const transactions = await getTransactions()
+  const arrayCategory = transactions?.map((t: any) => t.category)
+  const duplication = arrayCategory?.filter(
+    (item: any, index: number) => arrayCategory?.indexOf(item) !== index
   )
   return (
     <div className='p-4'>
@@ -14,9 +14,11 @@ const RecurringBills = () => {
 
       <div className='flex flex-col gap-2'>
         {transactions
-          .filter((t) => t.type === 'expense')
-          .filter((t) => t.category.includes(duplication[0]))
-          .map((t, i) => (
+          ?.filter((t: any) => t.type === 'expense')
+          .filter((t: any) =>
+            t.category.includes(duplication ? duplication[0] : null)
+          )
+          .map((t: any, i: number) => (
             <div
               key={t.description}
               className={

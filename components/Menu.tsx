@@ -31,6 +31,11 @@ const menuItems = [
         label: 'Recurring Bills',
         href: '/dashboard/recurring-bills',
       },
+      {
+        icon: '/images/plus.svg',
+        label: 'Add Transaction',
+        href: '/dashboard/add-transaction',
+      },
     ],
   },
 ]
@@ -65,6 +70,7 @@ const Menu = () => {
           })}
         </div>
       ))}
+      
     </div>
   )
 }

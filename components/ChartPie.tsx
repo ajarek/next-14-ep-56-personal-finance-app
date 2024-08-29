@@ -18,29 +18,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import transactions from '@/data/data.json'
 
 
-const income = transactions
-    .filter((t) => t.type === 'income')
-    .reduce((acc, t) => acc + t.amount, 0)
 
-    const entertainment = transactions
-    .filter((e)=>e.category==='entertainment')
-    .reduce((acc, t) => acc + t.amount, 0)
-   const diningOut= transactions
-   .filter((e)=>e.category==='dining out')
-   .reduce((acc, t) => acc + t.amount, 0)
-   const groceries= transactions
-   .filter((e)=>e.category==='groceries')
-   .reduce((acc, t) => acc + t.amount, 0)
 
-const chartData = [
-  { browser: "income", visitors: income, fill: "var(--color-income)" },
-  { browser: "entertainment", visitors: entertainment, fill: "var(--color-entertainment)" },
-  { browser: "diningOut", visitors: diningOut, fill: "var(--color-diningOut)" },
-  { browser: "groceries", visitors: groceries, fill: "var(--color-groceries)" },
-]
 
 const chartConfig = {
   visitors: {
@@ -65,10 +46,16 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function ChartPie() {
+export function ChartPie({income, entertainment, diningOut, groceries  }: any) {
+  const chartData = [
+    { browser: "income", visitors: income, fill: "var(--color-income)" },
+    { browser: "entertainment", visitors: entertainment, fill: "var(--color-entertainment)" },
+    { browser: "diningOut", visitors: diningOut, fill: "var(--color-diningOut)" },
+    { browser: "groceries", visitors: groceries, fill: "var(--color-groceries)" },
+  ]
   const totalVisitors = React.useMemo(() => {
     return (income-(entertainment+diningOut+groceries)).toFixed(2)
-  }, [])
+  }, [diningOut, entertainment, groceries, income])
 
   return (
     <Card className="flex flex-col">

@@ -1,13 +1,11 @@
-import transactions from '@/data/data.json'
 import { cn } from '@/lib/utils'
-
-const Transitions = () => {
-  const income = transactions
-    .filter((t) => t.type === 'income')
-    .reduce((acc, t) => acc + t.amount, 0)
-  const expense = transactions
-    .filter((t) => t.type === 'expense')
-    .reduce((acc, t) => acc + t.amount, 0)
+import { getTransactions } from '@/lib/action'
+const Transitions =async () => {
+  const transactions = await getTransactions() 
+  const income = transactions?.filter((t:any) => t.type === 'income')
+    .reduce((acc:any, t:any) => acc + t.amount, 0)
+  const expense = transactions?.filter((t:any) => t.type === 'expense')
+    .reduce((acc:any, t:any) => acc + t.amount, 0)
   return (
     <div className='flex flex-col gap-4 p-4'>
       <div className='flex flex-col items-center justify-between py-2'>
@@ -24,7 +22,7 @@ const Transitions = () => {
         </div>
       </div>
       <div className='flex flex-col gap-2'>
-        {transactions.map((t, i) => (
+        {transactions?.map((t:any, i:number) => (
           <div
             key={t.description}
             className={cn(
