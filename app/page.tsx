@@ -10,14 +10,14 @@ export default async function Home() {
   return (
     <main className='w-full min-h-screen  relative   '>
       <Image
-        src='/images/head.png'
-        alt='Vercel Logo'
+        src='/images/startingImage.png'
+        alt='Starting image'
         fill
         className='object-cover max-sm:object-left'
       />
       <Link
         href='/register'
-        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black text-white text-xl hover:bg-gray-700 px-12 max-sm:px-4 py-4 rounded-lg '
+        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white text-xl hover:bg-gray-700 px-12 max-sm:px-4 py-4 rounded-lg '
       >
         Get Started 🚀
       </Link>

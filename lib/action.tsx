@@ -82,4 +82,7 @@ export const getTransactions = async () => {
   }
 }
 
+export const addTransactions = async (data:TransactionsType) => {
+  console.log('submit '+data.type+data.category+data.amount+data.description+data.date+data.userId)
+}
 
