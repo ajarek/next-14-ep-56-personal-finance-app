@@ -83,6 +83,20 @@ export const getTransactions = async () => {
 }
 
 export const addTransactions = async (data:TransactionsType) => {
-  console.log('submit '+data.type+data.category+data.amount+data.description+data.date+data.userId)
+  
+  const {type, category, amount, saved, description, date, userId} = data
+  try {
+    connectToDb()
+    const newTransactions = new Transactions({
+     type, category, amount, saved, description,date: date.toLocaleDateString('sv-SE'), userId
+    })
+    await newTransactions.save()
+    console.log('saved' + newTransactions)
+    revalidatePath('/dashboard/transactions')
+  } catch (err) {
+    console.log(err)
+  }finally {
+    redirect('/dashboard/transactions')
+  }
 }
 

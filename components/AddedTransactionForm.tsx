@@ -38,8 +38,8 @@ import {addTransactions} from '@/lib/action'
 const FormSchema = z.object({
   type: z.string({required_error: "Please select an type to display.",}),
   category: z.string({required_error: "Please select an category to display.",}),
-  amount: z.string({required_error:"Please enter the amount..",}),
-  saved: z.string({required_error:"Please enter the amount..",}),
+  amount: z.number({required_error:"Please enter the amount..",}),
+  saved: z.number({required_error:"Please enter the amount..",}),
   description:z.string({required_error:"Please enter a description of the transaction.",})
   .min(3, {
     message: "Description must be at least 10 characters.",
@@ -51,14 +51,14 @@ const FormSchema = z.object({
     required_error: "Date is required transaction",
   }),
 })
-const AddedTransactionForm = ({userId='jarek'}:{userId:string}) => {
+const AddedTransactionForm = ({userId}:{ userId: string | null | undefined}) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
  
   async function  onSubmit  (data: z.infer<typeof FormSchema>) {
    
-      await addTransactions({...data, userId});
+      await addTransactions({...data, userId:userId??''});
     
   }
  
@@ -121,7 +121,7 @@ const AddedTransactionForm = ({userId='jarek'}:{userId:string}) => {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input   type="number"  placeholder="Please enter the transaction amount" {...field} />
+                <Input   type="number"  placeholder="Please enter the transaction amount" {...field}  onChange={(e) => field.onChange(parseFloat(e.target.value))}/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -135,7 +135,7 @@ const AddedTransactionForm = ({userId='jarek'}:{userId:string}) => {
             <FormItem>
               <FormLabel>Saved</FormLabel>
               <FormControl>
-                <Input   type="number"  placeholder="Please enter the transaction saved" {...field} />
+                <Input   type="number"  placeholder="Please enter the transaction saved" {...field} onChange={(e) => field.onChange(parseFloat(e.target.value))} />
               </FormControl>
               <FormMessage />
             </FormItem>

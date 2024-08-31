@@ -22,7 +22,12 @@ const Transitions =async () => {
         </div>
       </div>
       <div className='flex flex-col gap-2'>
-        {transactions?.map((t:any, i:number) => (
+        {transactions?.sort((a, b) => {
+   
+    let dateA = new Date(a.date) as Date
+    let dateB = new Date(b.date) as Date
+    return dateB.getTime() - dateA.getTime()
+}).map((t:any, i:number)=> (
           <div
             key={t.description}
             className={cn(

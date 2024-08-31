@@ -15,7 +15,7 @@ export type Transactions = {
   type: string
   category: string
   amount: number
-  date: string
+  date: Date
   description: string
   saved: number
   userId:string
@@ -39,7 +39,7 @@ const transactionsSchema = new mongoose.Schema(
     userId:{type: String, required: true },
     category: { type: String, required: true },
     amount: { type: Number, required: true },
-    date: { type: String, required: true },
+    date: { type: Date, required: true },
     description: { type: String, required: true },
     saved: { type: Number, required: true },
   },
