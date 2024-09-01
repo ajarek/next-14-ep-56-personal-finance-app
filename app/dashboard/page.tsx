@@ -99,7 +99,7 @@ const Dashboard = async () => {
                 <h2 className='text-sm'>{t.description}</h2>
                 <div className='flex flex-col gap-2'>
                   <span className=''>${t.amount.toFixed(2)}</span>
-                  <span className=''>${t.date}</span>
+                  <span className=''>{t.date.toLocaleDateString('sv-SE')}</span>
                 </div>
               </div>
             ))}
@@ -117,7 +117,7 @@ const Dashboard = async () => {
               </Link>
             </div>
           </div>
-          <ChartPie />
+          <ChartPie income={income} entertainment={0} diningOut={0} groceries={0} />
           <div className='flex items-center justify-between py-2'>
             <h1 className='text-xl font-semibold'>Recurring Bills</h1>
             <Link

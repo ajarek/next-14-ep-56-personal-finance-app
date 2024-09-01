@@ -17,7 +17,7 @@ export type Transactions = {
   amount: number
   date: Date
   description: string
-  saved: number
+  saved: number 
   userId:string
 
 }

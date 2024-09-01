@@ -88,7 +88,7 @@ export const addTransactions = async (data:TransactionsType) => {
   try {
     connectToDb()
     const newTransactions = new Transactions({
-     type, category, amount, saved, description,date: date.toLocaleDateString('sv-SE'), userId
+     type, category, amount, saved:saved||0, description,date: date, userId
     })
     await newTransactions.save()
     console.log('saved' + newTransactions)
@@ -100,3 +100,16 @@ export const addTransactions = async (data:TransactionsType) => {
   }
 }
 
+export const deleteTransaction = async (formData: FormData)=>{
+ const id = formData.get('id')
+ try {
+  await connectToDb()
+  await Transactions.findOneAndDelete({ _id: id })
+  revalidatePath('/dashboard/transactions')
+  return { message: `Deleted transaction ${id}` }
+} catch (e) {
+  return { message: 'Failed to delete transaction' }
+}finally {
+  redirect('/dashboard/transactions')
+}
+}

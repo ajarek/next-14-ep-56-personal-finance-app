@@ -3,7 +3,7 @@ import { getTransactions } from '@/lib/action'
 const Pots = async () => {
   const transactions = await getTransactions()
   return (
-    <div className='flex flex-col gap-4 p-4'>
+    <div className='min-h-[calc(100vh-150px)] flex flex-col gap-4 p-4'>
       <h1 className='text-xl font-semibold'>Pots</h1>
 
       <div className='flex flex-col gap-2'>

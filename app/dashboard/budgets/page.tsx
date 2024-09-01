@@ -17,7 +17,7 @@ const Budgets = async () => {
     .reduce((acc: any, t: any) => acc + t.amount, 0)
 
   return (
-    <div className='flex flex-col'>
+    <div className='min-h-[calc(100vh-150px)] flex flex-col'>
       <div className='flex items-center justify-between py-2'>
         <h1 className='text-xl font-semibold'>Budgets</h1>
       </div>

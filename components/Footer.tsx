@@ -32,7 +32,7 @@ const items = [
 
 const Footer = () => {
   return (
-    <div className='w-full flex justify-evenly  text-sm py-4'>
+    <div className='w-full h-20 flex justify-evenly  text-sm py-4'>
       {items.map((item) => {
         return (
           <Link

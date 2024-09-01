@@ -7,7 +7,7 @@ const RecurringBills = async () => {
     (item: any, index: number) => arrayCategory?.indexOf(item) !== index
   )
   return (
-    <div className='p-4'>
+    <div className='min-h-[calc(100vh-150px)] p-4'>
       <div className='flex items-center justify-between py-2'>
         <h1 className='text-xl font-semibold'>Recurring Bills</h1>
       </div>

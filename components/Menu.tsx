@@ -8,7 +8,7 @@ const menuItems = [
       {
         icon: '/images/house.svg',
         label: 'Overview',
-        href: '/',
+        href: '/dashboard',
       },
 
       {
