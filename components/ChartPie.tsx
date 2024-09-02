@@ -44,14 +44,19 @@ const chartConfig = {
     label: "Groceries",
     color: "hsl(var(--chart-4))",
   },
+ other: {
+    label: "Other",
+    color: "hsl(var(--chart-5))",
+  },
 } satisfies ChartConfig
 
-export function ChartPie({income, entertainment, diningOut, groceries  }: any) {
+export function ChartPie({income, entertainment, diningOut, groceries, other  }: any) {
   const chartData = [
     { browser: "income", visitors: income, fill: "var(--color-income)" },
     { browser: "entertainment", visitors: entertainment, fill: "var(--color-entertainment)" },
     { browser: "diningOut", visitors: diningOut, fill: "var(--color-diningOut)" },
     { browser: "groceries", visitors: groceries, fill: "var(--color-groceries)" },
+    { browser: "other", visitors: other, fill: "var(--color-other)" },
   ]
   const totalVisitors = React.useMemo(() => {
     return (income-(entertainment+diningOut+groceries)).toFixed(2)

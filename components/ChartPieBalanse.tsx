@@ -24,7 +24,7 @@ const chartConfig = {
   },
   income: {
     label: 'Income',
-    color: 'hsl(var(--chart-1))',
+    color: 'hsl(142, 71%, 45%)',
   },
 
   expense: {
@@ -74,14 +74,14 @@ export function ChartPieBalanse({ income, expense }: any) {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className='fill-foreground text-2xl font-semibold'
+                          className='fill-blue-500 text-2xl font-semibold'
                         >
                           {totalVisitors.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className='fill-muted-foreground'
+                          className='fill-blue-500 '
                         >
                           Balance
                         </tspan>

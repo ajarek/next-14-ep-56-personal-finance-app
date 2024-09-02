@@ -66,7 +66,7 @@ const Dashboard = async () => {
                 .filter((_:any,i:number)=>i<3)
                 .map((t:any, i:number) => (
                   <div
-                    key={t.description}
+                    key={t._id}
                     className={cn(
                       'border-2 border-l-blue-500 rounded-lg p-2',
                       i % 2 !== 0 ? 'border-l-yellow-500' : ''
@@ -91,7 +91,7 @@ const Dashboard = async () => {
             {transactions?.filter((_:any,i:number)=>i<3)
             .map((t:any, i:number) => (
               <div
-                key={t.description}
+                key={t._id}
                 className={
                   'flex justify-between items-center border-2 border-blue-500 rounded-lg p-2 ' +
                   (i % 2 !== 0 ? 'border-yellow-500' : '')
@@ -134,7 +134,7 @@ const Dashboard = async () => {
               .filter((t:any) => t.category.includes(duplication?duplication[0]:null))
               .map((t:any, i:number) => (
                 <div
-                  key={t.description}
+                  key={t._id}
                   className={
                     'flex justify-between items-center border-2 border-blue-500 rounded-lg p-2 ' +
                     (i % 2 !== 0 ? 'border-yellow-500' : '')

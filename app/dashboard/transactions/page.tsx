@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils'
 import { getTransactions } from '@/lib/action'
 import Link from 'next/link'
 import DeleteTransaction from '@/components/DeleteTransaction'
+import { Pen } from 'lucide-react'
 const Transitions = async () => {
   const transactions = await getTransactions()
   const income = transactions
@@ -47,6 +48,14 @@ const Transitions = async () => {
                   <span className=''>{t.date.toLocaleDateString('sv-SE')}</span>
                 </div>
                 <DeleteTransaction id={t._id.toString()} />
+                <Link
+                  href={`/dashboard/transactions/edit?id=${t.userId}&description=${t.description}&amount=${t.amount}&type=${t.type}&category=${t.category}&saved=${t.saved}&date=${t.date}&id=${t._id} `}
+                >
+                  <Pen
+                    size={32}
+                    className='text-green-600 hover:text-green-400 transition-colors delay-100 ease-in-out'
+                  />
+                </Link>
               </div>
             </div>
           ))}
