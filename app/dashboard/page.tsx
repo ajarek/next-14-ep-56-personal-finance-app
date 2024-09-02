@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
 import { ChartPie } from '@/components/ChartPie'
+import { ChartPieBalanse } from '@/components/ChartPieBalanse'
 
 const Dashboard = async () => {
   const session = await auth()
@@ -117,7 +118,7 @@ const Dashboard = async () => {
               </Link>
             </div>
           </div>
-          <ChartPie income={income} entertainment={0} diningOut={0} groceries={0} />
+          <ChartPieBalanse income={income} expense={expense} />
           <div className='flex items-center justify-between py-2'>
             <h1 className='text-xl font-semibold'>Recurring Bills</h1>
             <Link
