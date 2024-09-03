@@ -228,8 +228,13 @@ const AddedTransactionForm = ({
             </FormItem>
           )}
         />
-        
-        <Button type='submit' className='w-full'>Submit</Button>
+
+        <Button
+          type='submit'
+          className='w-full'
+        >
+          Submit
+        </Button>
       </form>
     </Form>
   )

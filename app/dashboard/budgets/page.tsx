@@ -3,8 +3,10 @@ import { getTransactions } from '@/lib/action'
 import { auth } from '@/app/api/auth/auth'
 const Budgets = async () => {
   const session = await auth()
-  const transactionsAll = await getTransactions() 
-  const transactions= transactionsAll?.filter(t=>t.userId===session?.user?.email)
+  const transactionsAll = await getTransactions()
+  const transactions = transactionsAll?.filter(
+    (t) => t.userId === session?.user?.email
+  )
 
   const income = transactions
     ?.filter((t: any) => t.type === 'income')
@@ -29,7 +31,13 @@ const Budgets = async () => {
       </div>
 
       <div className='grid grid-cols-2 max-lg:grid-cols-1 gap-4'>
-        <ChartPie income={income} entertainment={entertainment} diningOut={diningOut} groceries={groceries} other={other} />
+        <ChartPie
+          income={income}
+          entertainment={entertainment}
+          diningOut={diningOut}
+          groceries={groceries}
+          other={other}
+        />
         <div className='flex flex-col justify-center gap-2 px-4'>
           <div className='text-[#2662d9]'>Income ${income.toFixed(2)}</div>
           <div className='text-[#2eb88a]'>
@@ -41,9 +49,7 @@ const Budgets = async () => {
           <div className='text-[#af57db]'>
             Groceries ${groceries.toFixed(2)}
           </div>
-          <div className='text-[#e23670]'>
-            Other ${other.toFixed(2)}
-          </div>
+          <div className='text-[#e23670]'>Other ${other.toFixed(2)}</div>
         </div>
       </div>
     </div>

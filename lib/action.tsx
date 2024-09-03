@@ -70,7 +70,6 @@ export const updateUser = async (formData: FormData) => {
   }
 }
 
-
 export const getTransactions = async () => {
   try {
     await connectToDb()
@@ -82,34 +81,39 @@ export const getTransactions = async () => {
   }
 }
 
-export const addTransactions = async (data:TransactionsType) => {
-  
-  const {type, category, amount, saved, description, date, userId} = data
+export const addTransactions = async (data: TransactionsType) => {
+  const { type, category, amount, saved, description, date, userId } = data
   try {
     connectToDb()
     const newTransactions = new Transactions({
-     type, category, amount, saved:saved||0, description,date: date, userId
+      type,
+      category,
+      amount,
+      saved: saved || 0,
+      description,
+      date: date,
+      userId,
     })
     await newTransactions.save()
     console.log('saved' + newTransactions)
     revalidatePath('/dashboard/transactions')
   } catch (err) {
     console.log(err)
-  }finally {
+  } finally {
     redirect('/dashboard/transactions')
   }
 }
 
-export const deleteTransaction = async (formData: FormData)=>{
- const id = formData.get('id')
- try {
-  await connectToDb()
-  await Transactions.findOneAndDelete({ _id: id })
-  revalidatePath('/dashboard/transactions')
-  return { message: `Deleted transaction ${id}` }
-} catch (e) {
-  return { message: 'Failed to delete transaction' }
-}finally {
-  redirect('/dashboard/transactions')
-}
+export const deleteTransaction = async (formData: FormData) => {
+  const id = formData.get('id')
+  try {
+    await connectToDb()
+    await Transactions.findOneAndDelete({ _id: id })
+    revalidatePath('/dashboard/transactions')
+    return { message: `Deleted transaction ${id}` }
+  } catch (e) {
+    return { message: 'Failed to delete transaction' }
+  } finally {
+    redirect('/dashboard/transactions')
+  }
 }

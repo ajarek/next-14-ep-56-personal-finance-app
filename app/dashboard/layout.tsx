@@ -1,8 +1,7 @@
 import Menu from '@/components/Menu'
-import Image from 'next/image'
 import Link from 'next/link'
-import Navbar from "@/components/Navbar";
-import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 export default function DashboardLayout({
   children,
 }: Readonly<{
@@ -14,16 +13,14 @@ export default function DashboardLayout({
         <Link
           href='/'
           className='w-full flex justify-center items-center gap-2 max-sm:gap-1'
-        >
-          
-        </Link>
+        ></Link>
         <Menu />
       </div>
       <div className='w-full '>
-      <Navbar/>
+        <Navbar />
         {children}
-        <Footer/>
-        </div>
+        <Footer />
+      </div>
     </div>
   )
 }

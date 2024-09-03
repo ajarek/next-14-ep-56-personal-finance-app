@@ -3,9 +3,11 @@ import { getTransactions } from '@/lib/action'
 import { auth } from '@/app/api/auth/auth'
 const Pots = async () => {
   const session = await auth()
-  const transactionsAll = await getTransactions() 
-  const transactions= transactionsAll?.filter(t=>t.userId===session?.user?.email)
-  
+  const transactionsAll = await getTransactions()
+  const transactions = transactionsAll?.filter(
+    (t) => t.userId === session?.user?.email
+  )
+
   return (
     <div className='min-h-[calc(100vh-150px)] flex flex-col gap-4 p-4'>
       <h1 className='text-xl font-semibold'>Pots</h1>

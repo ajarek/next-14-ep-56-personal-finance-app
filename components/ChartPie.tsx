@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import { TrendingUp } from "lucide-react"
-import { Label, Pie, PieChart } from "recharts"
+import * as React from 'react'
+import { TrendingUp } from 'lucide-react'
+import { Label, Pie, PieChart } from 'recharts'
 
 import {
   Card,
@@ -11,63 +11,77 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from '@/components/ui/card'
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-
-
-
-
+} from '@/components/ui/chart'
 
 const chartConfig = {
   visitors: {
-    label: "Visitors",
+    label: 'Visitors',
   },
   income: {
-    label: "Income",
-    color: "hsl(var(--chart-1))",
+    label: 'Income',
+    color: 'hsl(var(--chart-1))',
   },
- 
+
   entertainment: {
-    label: "Entertainment",
-    color: "hsl(var(--chart-2))",
+    label: 'Entertainment',
+    color: 'hsl(var(--chart-2))',
   },
   diningOut: {
-    label: "Dining Out",
-    color: "hsl(var(--chart-3))",
+    label: 'Dining Out',
+    color: 'hsl(var(--chart-3))',
   },
   groceries: {
-    label: "Groceries",
-    color: "hsl(var(--chart-4))",
+    label: 'Groceries',
+    color: 'hsl(var(--chart-4))',
   },
- other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
+  other: {
+    label: 'Other',
+    color: 'hsl(var(--chart-5))',
   },
 } satisfies ChartConfig
 
-export function ChartPie({income, entertainment, diningOut, groceries, other  }: any) {
+export function ChartPie({
+  income,
+  entertainment,
+  diningOut,
+  groceries,
+  other,
+}: any) {
   const chartData = [
-    { browser: "income", visitors: income, fill: "var(--color-income)" },
-    { browser: "entertainment", visitors: entertainment, fill: "var(--color-entertainment)" },
-    { browser: "diningOut", visitors: diningOut, fill: "var(--color-diningOut)" },
-    { browser: "groceries", visitors: groceries, fill: "var(--color-groceries)" },
-    { browser: "other", visitors: other, fill: "var(--color-other)" },
+    { browser: 'income', visitors: income, fill: 'var(--color-income)' },
+    {
+      browser: 'entertainment',
+      visitors: entertainment,
+      fill: 'var(--color-entertainment)',
+    },
+    {
+      browser: 'diningOut',
+      visitors: diningOut,
+      fill: 'var(--color-diningOut)',
+    },
+    {
+      browser: 'groceries',
+      visitors: groceries,
+      fill: 'var(--color-groceries)',
+    },
+    { browser: 'other', visitors: other, fill: 'var(--color-other)' },
   ]
   const totalVisitors = React.useMemo(() => {
-    return (income-(entertainment+diningOut+groceries)).toFixed(2)
+    return (income - (entertainment + diningOut + groceries)).toFixed(2)
   }, [diningOut, entertainment, groceries, income])
 
   return (
-    <Card className="flex flex-col">
-      <CardContent className="flex-1 pb-0">
+    <Card className='flex flex-col'>
+      <CardContent className='flex-1 pb-0'>
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className='mx-auto aspect-square max-h-[250px]'
         >
           <PieChart>
             <ChartTooltip
@@ -76,32 +90,32 @@ export function ChartPie({income, entertainment, diningOut, groceries, other  }:
             />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              dataKey='visitors'
+              nameKey='browser'
               innerRadius={60}
               strokeWidth={5}
             >
               <Label
                 content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  if (viewBox && 'cx' in viewBox && 'cy' in viewBox) {
                     return (
                       <text
                         x={viewBox.cx}
                         y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
+                        textAnchor='middle'
+                        dominantBaseline='middle'
                       >
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-2xl font-semibold"
+                          className='fill-foreground text-2xl font-semibold'
                         >
                           {totalVisitors.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          className='fill-muted-foreground'
                         >
                           Balance
                         </tspan>

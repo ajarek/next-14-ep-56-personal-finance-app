@@ -7,8 +7,10 @@ import { auth } from '@/app/api/auth/auth'
 
 const Transitions = async () => {
   const session = await auth()
-  const transactionsAll = await getTransactions() 
-  const transactions= transactionsAll?.filter(t=>t.userId===session?.user?.email)
+  const transactionsAll = await getTransactions()
+  const transactions = transactionsAll?.filter(
+    (t) => t.userId === session?.user?.email
+  )
   const income = transactions
     ?.filter((t: any) => t.type === 'income')
     .reduce((acc: any, t: any) => acc + t.amount, 0)

@@ -3,7 +3,7 @@
 import { deleteTransaction } from '@/lib/action'
 import { Trash2 } from 'lucide-react'
 
-export default function DeleteTransaction({ id }: { id: string  }) {
+export default function DeleteTransaction({ id }: { id: string }) {
   return (
     <form action={deleteTransaction}>
       <input
@@ -16,7 +16,10 @@ export default function DeleteTransaction({ id }: { id: string  }) {
         type='submit'
         className=' text-xl '
       >
-        <Trash2 size={32}  className='text-red-700 hover:text-red-500 transition-colors delay-100 ease-in-out' />
+        <Trash2
+          size={32}
+          className='text-red-700 hover:text-red-500 transition-colors delay-100 ease-in-out'
+        />
       </button>
     </form>
   )
