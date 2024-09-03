@@ -1,7 +1,9 @@
 import { getTransactions } from '@/lib/action'
-
+import { auth } from '@/app/api/auth/auth'
 const RecurringBills = async () => {
-  const transactions = await getTransactions()
+  const session = await auth()
+  const transactionsAll = await getTransactions() 
+  const transactions= transactionsAll?.filter(t=>t.userId===session?.user?.email)
   const arrayCategory = transactions?.map((t: any) => t.category)
   const duplication = arrayCategory?.filter(
     (item: any, index: number) => arrayCategory?.indexOf(item) !== index

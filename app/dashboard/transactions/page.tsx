@@ -3,8 +3,12 @@ import { getTransactions } from '@/lib/action'
 import Link from 'next/link'
 import DeleteTransaction from '@/components/DeleteTransaction'
 import { Pen } from 'lucide-react'
+import { auth } from '@/app/api/auth/auth'
+
 const Transitions = async () => {
-  const transactions = await getTransactions()
+  const session = await auth()
+  const transactionsAll = await getTransactions() 
+  const transactions= transactionsAll?.filter(t=>t.userId===session?.user?.email)
   const income = transactions
     ?.filter((t: any) => t.type === 'income')
     .reduce((acc: any, t: any) => acc + t.amount, 0)
