@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import {useTransition} from "react"
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -25,7 +26,7 @@ import {
 import { Input } from './ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { format } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
+import { CalendarIcon, LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -61,12 +62,17 @@ const AddedTransactionForm = ({
 }: {
   userId: string | null | undefined
 }) => {
+
+  const [isPending, startTransition] = useTransition()
+  
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    await addTransactions({ ...data, userId: userId ?? '' })
+    startTransition(async () => {
+      await addTransactions({ ...data, userId: userId ?? '' })  
+    })
   }
 
   return (
@@ -232,8 +238,19 @@ const AddedTransactionForm = ({
         <Button
           type='submit'
           className='w-full'
+          disabled={isPending}
         >
-          Submit
+          {
+            !isPending
+              ? "Submit"
+              : <>
+                <LoaderCircle
+                  className="animate-spin"  
+                  size={20}
+                />
+                Submitting...
+              </>
+          }
         </Button>
       </form>
     </Form>
