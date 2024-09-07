@@ -237,7 +237,7 @@ const AddedTransactionForm = ({
 
         <Button
           type='submit'
-          className='w-full'
+          className='w-full flex gap-2'
           disabled={isPending}
         >
           {
